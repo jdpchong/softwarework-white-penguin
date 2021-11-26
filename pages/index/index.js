@@ -24,7 +24,34 @@ Page({
            
       ]
   },
-
+  sendLike: function (e) {
+    // console.log(e.currentTarget.dataset.index)
+    var _url = this.data.articleList[e.currentTarget.dataset.index].blogUrl
+    var that = this;
+    wx.request({
+        url: 'http://127.0.0.1:5000/hotlist',
+        data: {//传递给后端的数据：所点击的URL和用户信息
+            url: _url,
+            userinfo: wx.getStorageSync('userinfo'),
+        },
+        header: {
+            'content-type': 'application/json'
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: function (res) {
+            console.log(res.data); //res.data为后台返回的数据
+            that.setData({ //用that而不是this，用this就是success的this就错了
+                list:res.data.result
+            })
+        },
+        fail: function (err) {}, //请求失败
+        complete: function () {} //请求完成后执行的函数
+    })
+    wx.showToast({
+      title: '收藏成功'
+    })
+},
   /**
    * 生命周期函数--监听页面加载
    */
