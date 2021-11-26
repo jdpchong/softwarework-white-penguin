@@ -26,10 +26,10 @@ class="first_tab">
 <!-- 上方文章信息 -->
 <view class="titlebox">
     <view class="title">{{item.blogTitle}}</view>
-    <view class="collect">
+    <button class="collect" catchtap="sendLike">
     <image src="../../images/heart.png"></image>
     <view class="collect_text">收藏</view>
-    </view>
+    </button>
 </view>
 <!-- 下方文章信息 -->
 <view class="brief">文章简介：{{item.blogBrief}}</view>
